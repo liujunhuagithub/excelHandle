@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil
 import cn.hutool.core.bean.copier.CopyOptions
 import cn.hutool.poi.excel.ExcelReader
 import cn.hutool.poi.excel.WorkbookUtil
+import my.ljh.excelhandle.Utils
 import my.ljh.excelhandle.entity.Entity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -25,7 +26,7 @@ class DataController {
             reader.readAll(Entity::class.java).forEach { entity ->
                 assert(!(entity.pk == ""))
                 val t = temp.find { _entity -> _entity.pk == entity.pk }
-                if (t == null) temp.add(entity) else BeanUtil.copyProperties(entity, t)
+                if (t == null) temp.add(entity) else Utils.merge(entity, t)
             }
 
         }
