@@ -9,7 +9,7 @@ object Utils {
     @Throws(Exception::class)
     fun <M> merge(target: M, destination: M) {
         //获取目标bean
-        val beanInfo = Introspector.getBeanInfo(target::class.java)
+        val beanInfo = Introspector.getBeanInfo(target!!::class.java)
         // 遍历所有属性
         for (descriptor in beanInfo.propertyDescriptors) {
             // 如果是可写属性
